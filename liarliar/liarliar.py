@@ -14,7 +14,7 @@ for accuser in xrange(num_accusers):
     liars = set()
     for i in xrange(int(num)): liars.add(f.readline().strip())
     if not(name in grpA or name in grpB):
-        if liars.issubset(grpA): grpB.add(name)
+        if liars <= grpA: grpB.add(name)
         else: grpA.add(name)        
 
 a, b = len(grpA), len(grpB)
