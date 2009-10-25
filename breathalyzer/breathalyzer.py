@@ -17,14 +17,19 @@ def edits1(word):
 words = open(sys.argv[1]).readline().split()
 score = 0
 for word in words:
+    print 'doing word', word
     if word in wordlist:
+        print 'found wrod on 0', word
         continue
+    print 'not found word on 0', word
     displace = 1
     dwords = edits1(word)
+    print 'dwords', dwords
     while True:
-        for dispword in dwords:
-            if dispword in wordlist:
-                break
+        print 'whiles'
+        if dwords & wordlist == set():
+            print 'found'
+        print 'not found'
         displace += 1
         cwords = set(dwords)
         for dispword in cwords:
