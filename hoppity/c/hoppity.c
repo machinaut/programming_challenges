@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define BUFFERSIZE 50
-
 int
 main (int argc, char *argv[])
 {
@@ -10,14 +8,12 @@ main (int argc, char *argv[])
 
     fscanf(fopen(argv[1],"r"), "%lld", &n);
 
-    for (int i = 1; i <= n; i++) {
-        if (i % 15 == 0) {
-            printf("Hop\n");
-        } else if (i % 5 == 0) {
-            printf("Hophop\n");
-        } else if (i % 3 == 0) {
-            printf("Hoppity\n");
-        }
+    for (int i = 0; i < n/15; i++)
+        puts("Hoppity\nHophop\nHoppity\n"
+            "Hoppity\nHophop\nHoppity\nHop\n");
+    for (int i = 0; i < n%15; i++) {
+        if (i %  5 == 0) puts("Hophop\n");
+        else if (i %  3 == 0) puts("Hoppity\n");
     }
 
     return EXIT_SUCCESS;

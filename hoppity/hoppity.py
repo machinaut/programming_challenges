@@ -1,10 +1,6 @@
 #!/usr/bin/env python
 import sys
 
-if len(sys.argv) != 2:
-    print 'Usage: hoppity <inputfile>'
-    exit(1)
-
 filename = sys.argv[1]
 
 inputfile = open(filename)
