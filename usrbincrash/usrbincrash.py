@@ -24,14 +24,11 @@ if __name__ == "__main__":
 
     input = open(sys.argv[1]) # input file
     bag = int(input.readline().strip()) # max weight we have to drop
-
     items = [] #(weight, cost, max), ...
-
     for line in input:
         SKU, weight, cost = line.split()
         max = (bag + int(weight) - 1)/ int(weight) + 1 # max qty of this item
         items.append( (int(weight), int(cost), max) )
-    print bag
-    print items
+
     print brute(bag, items) 
 
