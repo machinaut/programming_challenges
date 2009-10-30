@@ -1,27 +1,38 @@
 #!/usr/bin/env python
 import sys
 
-f = open(sys.argv[1])
-num_accusers = int(f.readline())
+def bipartite(ext):
+    grpA, grpB = set(), set()
+    while ext != []: # will not halt on bad input
+        for i, (name, liars) in enumerate(ext):
+            if not(name in grpA or name in grpB):
+                if liars <= grpA or (grpA == grpB == set()):
+                    grpB.add(name)
+                    grpA |= liars
+                elif liars <= grpB:
+                    grpA.add(name)
+                    grpB |= liars
+                else: # no idea where they go
+                    continue
+            elif name in grpA:
+                grpB |= liars
+            else: #name in grpB
+                grpA |= liars
+            del ext[i]
+    return grpA, grpB
 
-grpA, grpB = set(), set()
+if __name__ == "__main__":
+    f = open(sys.argv[1])
+    num_accusers = int(f.readline())
 
-for accuser in xrange(num_accusers):
-    name, num = f.readline().split()
-    liars = set()
-    for i in xrange(int(num)):
-        liars.add(f.readline().strip())
-    if not(name in grpA or name in grpB):
-        if liars <= grpA:
-            grpB.add(name)
-            grpA |= liars
-        else:
-            grpA.add(name)
-            grpB |= liars        
-    elif name in grpA:
-        grpB |= liars
-    else: #name in grpB
-        grpA |= liars
+    ext = []
+    for accuser in xrange(num_accusers):
+        name, num = f.readline().split()
+        liars = set()
+        for i in xrange(int(num)):
+            liars.add(f.readline().strip())
+        ext.append((name,liars))
 
-a, b = len(grpA), len(grpB)
-print max(a,b), min(a,b)
+    grpA, grpB = bipartite(ext)
+    a, b = len(grpA), len(grpB)
+    print max(a,b), min(a,b)
