@@ -3,7 +3,6 @@
 #include<stdio.h>
 #include<string.h>
 #define EXTENT 26
-// TODO: can cut half iterations by only doing i=0, j=i
 int main () {
 int circuits,ckt;
 char *line = (char*)malloc(1026*sizeof(char));
@@ -52,7 +51,6 @@ for (ckt=0;ckt<circuits;ckt++) {
     for (i=1;i<EXTENT-1;i++) { 
       if (con[i] == 2) {
         count += 1;
-        // find other ends
         aa = 0.; bb = 0.;
         a = 0; b = 0;
         for (j=0;j<EXTENT;j++) {
@@ -78,11 +76,6 @@ for (ckt=0;ckt<circuits;ckt++) {
         tab[b][i] = 0.;
       }
     }
-  /*for (i=0;i<EXTENT;i++) { 
-    for(j=0;j<EXTENT;j++) {
-      printf("%g ",tab[i][j]);
-    } printf("\n");
-  } */
   }
   printf("%0.4f\n",tab[0][EXTENT-1]);
 }
